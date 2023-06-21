@@ -67,7 +67,7 @@ export const getStaticPaths: GetStaticPaths = async () => {
     paths: [
       {
         // renderiza uma rota de forma estatica
-        params: { id: 'prod_O7gG6pvZF86yg8' }
+        params: {}
       }
     ],
 
