@@ -3,6 +3,7 @@ import { ImageContainer, SuccessContainer } from "../../styles/pages/success";
 import { GetServerSideProps } from "next";
 import { stripe } from "../../lib/stripe";
 import Stripe from "stripe";
+import Image from "next/image";
 
 interface SuccessProps {
   customerName: string;
@@ -18,7 +19,7 @@ export default function Success({ customerName, product }: SuccessProps) {
       <h1>Compra efetuada</h1>
 
       <ImageContainer>
-
+        <Image src={product.imageUrl} width={120} height={110} alt="" />
       </ImageContainer>
 
       <p>
