@@ -5,6 +5,9 @@ const nextConfig = {
       'files.stripe.com',
     ],
   },
+  experimental: {
+    ewNextLinkBehavior: true,
+  }
 }
 
 module.exports = nextConfig
