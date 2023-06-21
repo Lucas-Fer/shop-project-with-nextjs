@@ -10,6 +10,7 @@
   },
   "dependencies": {
     "@stitches/react": "^1.2.8",
+    "axios": "^1.4.0",
     "eslint": "8.43.0",
     "eslint-config-next": "13.4.6",
     "keen-slider": "^6.8.5",

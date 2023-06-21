@@ -1,4 +1,3 @@
-import { useRouter } from 'next/router'
 import React from 'react'
 import { ImageContainer, ProductContainer, ProductDetails } from "../../styles/pages/product"
 import { stripe } from '../../lib/stripe';
@@ -6,19 +5,33 @@ import { GetStaticPaths, GetStaticProps } from 'next';
 import Stripe from 'stripe';
 import { priceFormatter } from '../../utils/priceFormatter';
 import Image from 'next/image';
+import axios from 'axios';
 
 interface ProductDetail {
   productDetail: {
-    id: string
-    name: string
-    imageUrl: string
-    price: string,
-    description: string,
+    id: string;
+    name: string;
+    imageUrl: string;
+    price: string;
+    description: string;
+    priceId: string;
   }
 }
 
 export default function Product({ productDetail }: ProductDetail) {
-  const { query } = useRouter();
+  async function handleBuyProduct() {
+    try {
+      const response = await axios.post('/api/product', {
+        priceId: productDetail.priceId
+      })
+
+      const { checkoutUrl } = response.data;
+
+      window.location.href = checkoutUrl;
+    } catch (error) {
+      alert('Falha ao redirecionar')
+    }
+  }
 
   return (
     <ProductContainer>
@@ -32,7 +45,7 @@ export default function Product({ productDetail }: ProductDetail) {
 
         <p>{productDetail.description}</p>
 
-        <button>
+        <button onClick={handleBuyProduct}>
           Comprar agora
         </button>
       </ProductDetails>
@@ -69,6 +82,7 @@ export const getStaticProps: GetStaticProps<any, { id: string }> = async ({ para
     imageUrl: response.images[0],
     price: priceFormatter.format(productPrice.unit_amount / 100),
     description: response.description,
+    priceId: productPrice.id,
   }
 
   return {
