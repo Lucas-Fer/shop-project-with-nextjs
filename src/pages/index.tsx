@@ -5,6 +5,7 @@ import 'keen-slider/keen-slider.min.css'
 import { stripe } from "../lib/stripe"
 import { GetStaticProps } from "next"
 import Stripe from "stripe"
+import { priceFormatter } from "../utils/priceFormatter"
 
 interface HomeProps {
   products: {
@@ -54,7 +55,7 @@ export const getStaticProps: GetStaticProps = async () => {
       id: product.id,
       name: product.name,
       imageUrl: product.images[0],
-      price: price.unit_amount / 100,
+      price: priceFormatter.format(price.unit_amount / 100),
     }
   })
 
