@@ -19,6 +19,7 @@ export default function Success({ customerName, product }: SuccessProps) {
     <>
       <Head>
         <title>{product.name} | Ignite Shop</title>
+        <meta name="robots" content="noindex" />
       </Head>
 
       <SuccessContainer>
