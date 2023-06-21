@@ -6,6 +6,7 @@ import Stripe from 'stripe';
 import { priceFormatter } from '../../utils/priceFormatter';
 import Image from 'next/image';
 import axios from 'axios';
+import Head from 'next/head';
 
 interface ProductDetail {
   productDetail: {
@@ -34,22 +35,30 @@ export default function Product({ productDetail }: ProductDetail) {
   }
 
   return (
-    <ProductContainer>
-      <ImageContainer>
-        <Image src={productDetail.imageUrl} width={520} height={480} alt='' />
-      </ImageContainer>
 
-      <ProductDetails>
-        <h1>{productDetail.name}</h1>
-        <span>{productDetail.price}</span>
+    <>
+      <Head>
+        <title>{productDetail.name} | Ignite Shop</title>
+      </Head>
 
-        <p>{productDetail.description}</p>
+      <ProductContainer>
+        <ImageContainer>
+          <Image src={productDetail.imageUrl} width={520} height={480} alt='' />
+        </ImageContainer>
 
-        <button onClick={handleBuyProduct}>
-          Comprar agora
-        </button>
-      </ProductDetails>
-    </ProductContainer>
+        <ProductDetails>
+          <h1>{productDetail.name}</h1>
+          <span>{productDetail.price}</span>
+
+          <p>{productDetail.description}</p>
+
+          <button onClick={handleBuyProduct}>
+            Comprar agora
+          </button>
+        </ProductDetails>
+      </ProductContainer>
+    </>
+
   )
 }
 
